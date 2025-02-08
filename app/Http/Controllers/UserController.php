@@ -128,7 +128,8 @@ class UserController extends Controller
             $token = JWTToken::createTokenForSetPassword($email);
             return response()->json([
                 'status' => 'success',
-                'message' => 'OTP code verified'
+                'message' => 'OTP code verified',
+                'token' => $token
             ], 200);
         } else {
             return response()->json([

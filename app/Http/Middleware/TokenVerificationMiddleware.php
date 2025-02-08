@@ -22,8 +22,8 @@ class TokenVerificationMiddleware
         if ($result == 'unauthorized') {
             return response()->json(['message' => 'Unauthorized'], 401);
         } else {
-            $request->headers->set('email', $result->userEmail);
-            $request->headers->set('id', $result->userID);
+            $request->headers->set('email', $result['userEmail']);
+            $request->headers->set('id', $result['userID']);
             return $next($request);
         }
     }
