@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -51,3 +52,6 @@ Route::post('/create-invoice', [InvoiceController::class, 'invoiceCreate'])->mid
 Route::get('/select-invoice', [InvoiceController::class, 'invoiceSelect'])->middleware([TokenVerificationAPIMiddleware::class])->name(name: 'selectInvoice');
 Route::post('/delete-invoice', [InvoiceController::class, 'invoiceDelete'])->middleware([TokenVerificationAPIMiddleware::class])->name(name: 'deleteInvoice');
 Route::post('/detail-invoice',[InvoiceController::class,'invoiceDetail'])->middleware([TokenVerificationAPIMiddleware::class])->name('detailInvoice');
+
+//dashboard
+Route::get('/summary', [DashboardController::class, 'showSummary'])->middleware([TokenVerificationAPIMiddleware::class])->name(name: 'showSummary');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\InvoiceProduct;
@@ -32,14 +33,15 @@ class InvoiceController extends Controller
             ]);
 
             $invoice_id= $invoice->id;
-            $products= $request->input('products');
+            $products= $request->input('products'); //picking products from frontend
 
             foreach ($products as $product) {
                 InvoiceProduct::create([
                     'invoice_id'=>$invoice_id,
                     'product_id'=>$product['product_id'],
                     'quantity'=>$product['quantity'],
-                    'sale_price'=>$product['sale_price']
+                    'sale_price'=>$product['sale_price'],
+                    'user_id'=>$user_id
                 ]);
             }
 
@@ -55,9 +57,7 @@ class InvoiceController extends Controller
         $user_id = $request->header('id');
         return Invoice::where('user_id',$user_id)->with('customer')->get();
     }
-    function invoiceDetails(Request $request){
 
-    }
     function invoiceDelete(Request $request){
 
         DB::beginTransaction();
